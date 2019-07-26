@@ -7,7 +7,8 @@ class Key
   end
 
   def generate_random
-    @random_num = (rand(1..100000))
+    random = (rand(1..100000)).to_s
+    @random_num = ("0" * (5-(random.length)) + random)
   end
 
   def slice_num

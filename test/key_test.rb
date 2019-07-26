@@ -21,6 +21,7 @@ class KeyTest < Minitest::Test
   def test_generate_random
     rando = @key.random_num
     @key.generate_random
+    binding.pry
     refute rando == @key.random_num
   end
 
