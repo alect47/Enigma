@@ -23,4 +23,10 @@ class KeyTest < Minitest::Test
     @key.generate_random
     refute rando == @key.random_num
   end
+
+  def test_can_slice_number
+    key_1 = Key.new(42743)
+    assert_equal [42, 27, 74, 43], key_1.slice_num
+  end
+
 end

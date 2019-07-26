@@ -21,6 +21,8 @@ class ShiftTest < Minitest::Test
     assert_equal 250819, @shift.offset
   end
 
+  
+
   # def test_can_add_alphabet
   #   expected  = ("a".."z").to_a << " "
   #   assert_equal expected,
