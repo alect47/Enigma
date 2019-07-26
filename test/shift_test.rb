@@ -14,9 +14,11 @@ class ShiftTest < Minitest::Test
     assert_instance_of Shift, @shift
   end
 
-  def test_has_alpahbet
+  def test_shift_has_attributes
     assert_equal "c", @shift.alphabet[2]
-    assert_equal " ", @shift.alphabet[26]
+    #if start with zero get invalid octal digit error
+    assert_equal 12439, @shift.key
+    assert_equal 250819, @shift.offset
   end
 
   # def test_can_add_alphabet
