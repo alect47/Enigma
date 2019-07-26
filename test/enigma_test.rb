@@ -1,8 +1,8 @@
 require './test/test_helper'
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/enigma'
-require 'pry'
+# require 'minitest/autorun'
+# require 'minitest/pride'
+# require './lib/enigma'
+# require 'pry'
 
 class EnigmaTest < Minitest::Test
 
