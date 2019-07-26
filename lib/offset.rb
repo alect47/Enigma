@@ -12,4 +12,14 @@ class Offset
     @date = cur_date.strftime("%d/%m/%y").gsub("/","").to_i
   end
 
+  def square_date
+    @date * @date
+  end
+
+  def make_keys
+    square_date.to_s.split('')[-4..-1].map(&:to_i)
+  end
+
+
+
 end
