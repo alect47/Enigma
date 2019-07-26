@@ -1,8 +1,8 @@
 require './test/test_helper'
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/shift'
-require 'pry'
+# require 'minitest/autorun'
+# require 'minitest/pride'
+# require './lib/shift'
+# require 'pry'
 
 class ShiftTest < Minitest::Test
 
@@ -21,7 +21,7 @@ class ShiftTest < Minitest::Test
     assert_equal 250819, @shift.offset
   end
 
-  
+
 
   # def test_can_add_alphabet
   #   expected  = ("a".."z").to_a << " "

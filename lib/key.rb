@@ -1,18 +1,17 @@
 class Key
-  attr_reader :random_num
+  attr_reader :given_key
 
-  def initialize(random_num = (rand(1..100000)))
-    @random_num = random_num
-    @date_input = 121799
+  def initialize(given_key = "12345")
+    @given_key = given_key
   end
 
   def generate_random
     random = (rand(1..100000)).to_s
-    @random_num = ("0" * (5-(random.length)) + random)
+    @given_key = ("0" * (5-(random.length)) + random)
   end
 
   def slice_num
-    @random_num.to_s.split('')
+    @given_key.to_s.split('')
   end
 
 end
