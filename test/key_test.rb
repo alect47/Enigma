@@ -11,15 +11,16 @@ class KeyTest < Minitest::Test
   end
 
   def test_generate_random
-    @key.stubs(:generate_random).returns("13579")
-    assert_equal "13579", @key.generate_random
+    assert_equal 5, @key.generate_random.length
   end
 
-  # def test_can_slice_number
-  #   # skip
-  #   key_1 = Key.new
-  #   key_1.stubs(:generate_random).returns("12345")
-  #   assert_equal [12, 23, 34, 45], key_1.slice_num
-  # end
+  def test_new_number
+    @key.stubs(:generate_random).returns("13579")
+    assert_equal "13579", @key.new_number
+  end
+
+  def test_slice_number
+    assert_equal ["1", "2", "3", "4", "5"], @key.slice_num
+  end
 
 end
