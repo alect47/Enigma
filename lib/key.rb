@@ -6,7 +6,7 @@ class Key
   end
 
   def generate_random
-
+    @random_num = (rand(1..100000))
   end
 
 end

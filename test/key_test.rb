@@ -17,4 +17,10 @@ class KeyTest < Minitest::Test
   def test_attributes
     assert_instance_of Integer, @key.random_num
   end
+
+  def test_generate_random
+    rando = @key.random_num
+    @key.generate_random
+    refute rando == @key.random_num
+  end
 end
