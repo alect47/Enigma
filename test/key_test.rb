@@ -13,4 +13,8 @@ class KeyTest < Minitest::Test
   def test_key_exists
     assert_instance_of Key, @key
   end
+
+  def test_attributes
+    assert_instance_of Integer, @key.random_num
+  end
 end
