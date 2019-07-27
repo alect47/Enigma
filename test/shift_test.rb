@@ -26,7 +26,6 @@ class ShiftTest < Minitest::Test
   end
 
   def test_can_combine_key_and_offset
-    # binding.pry
     key_1 = Key.new("12345")
     offset_1 = Offset.new("270819")
     shift_1 = Shift.new(key_1, offset_1)
