@@ -3,26 +3,29 @@ require './test/test_helper'
 class KeyTest < Minitest::Test
 
   def setup
-    @key = Key.new
+    @key = Key.new("13579")
   end
 
   def test_key_exists
     assert_instance_of Key, @key
   end
 
+  def test_attributes
+    assert_equal "13579", @key.number
+    assert_equal ({:A=>13, :B=>35, :C=>57, :D=>79}), @key.key_hash
+  end
+
   def test_generate_random
     assert_equal 5, @key.generate_random_new_number.length
   end
 
-  # def test_new_number
-  #   @key.stubs(:generate_random).returns("13579")
-  #   assert_equal "13579", @key.new_number
-  # end
+  def test_assign_new_num
+    @key.stubs(:generate_random_new_number).returns("47474")
+    assert_equal "47474", @key.assign_new_num
+  end
 
   def test_slice_number
     @key.stubs(:number).returns("13579")
-    # @key.generate_random_new_number
-    # binding.pry
     assert_equal ["1", "3", "5", "7", "9"], @key.slice_num
   end
 

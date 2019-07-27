@@ -10,13 +10,11 @@ class Key
   def generate_random_new_number
     random = (rand(1..100000)).to_s
     ("0" * (5-(random.length)) + random)
-    @number = random
   end
 
-  # def new_number
-  #   random = (rand(1..100000)).to_s
-  #   @number = generate_random("0" * (5-(random.length)) + random)
-  # end
+  def assign_new_num
+    @number = generate_random_new_number
+  end
 
   def slice_num
     @number.split('')
