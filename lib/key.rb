@@ -1,19 +1,19 @@
 class Key
+
   attr_reader :number, :key_hash
 
-    def initialize(number = "12345")
+    def initialize(number = generate_random_new_number)
       @number = number
-      @key_hash = Hash.new(0)
+      @key_hash = make_key_hash
     end
 
-  def generate_random
+  def generate_random_new_number
     random = (rand(1..100000)).to_s
     ("0" * (5-(random.length)) + random)
   end
 
-  def new_number
-    random = (rand(1..100000)).to_s
-    @number = generate_random("0" * (5-(random.length)) + random)
+  def assign_new_num
+    @number = generate_random_new_number
   end
 
   def slice_num

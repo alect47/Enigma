@@ -1,13 +1,12 @@
 require './test/test_helper'
-# require 'minitest/autorun'
-# require 'minitest/pride'
-# require './lib/shift'
-# require 'pry'
 
 class ShiftTest < Minitest::Test
 
   def setup
-    @shift = Shift.new
+    # binding.pry
+    @key = Key.new
+    @offset = Offset.new
+    @shift = Shift.new(@key, @offset)
   end
 
   def test_it_exists
@@ -15,10 +14,19 @@ class ShiftTest < Minitest::Test
   end
 
   def test_shift_has_attributes
-    assert_equal "c", @shift.alphabet[2]
-    #if start with zero get invalid octal digit error
-    assert_equal 12439, @shift.key
-    assert_equal 250819, @shift.offset
+    skip
+    assert_equal ({}), @shift.keys
+    assert_equal ({}), @shift.offsets
+  end
+
+  def test_add_keys
+    skip
+    assert_equal @key, @shift.add_keys(@key)
+  end
+
+  def test_add_offsets
+    skip
+    assert_equal @offset, @shift.add_offsets(@offset)
   end
 
 
