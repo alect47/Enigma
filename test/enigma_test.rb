@@ -22,14 +22,21 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.to_array("hi hello")
   end
 
+  def test_find_alphabet_index
+    assert_equal 7, @enigma.find_position("h")
+  end
+
+  def test_convert_letter_to_index
+    assert_equal [], @enigma.letter_to_index("hi hello")
+  end
+
   def test_rotate_alphabet
     assert_equal "d", @enigma.rotate_alphabet(3)[0]
   end
 
   def test_use_shift_to_rotate_alphabet
     @enigma.shift.stubs(:combine).returns({:A=>1, :B=>2, :C=>3, :D=>4})
-    # binding.pry
-    assert_equal "", @enigma.use_shift_rotate
+    assert_equal "b", @enigma.use_shift_rotate[:A][0]
   end
 
 

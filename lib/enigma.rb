@@ -14,6 +14,16 @@ class Enigma
     phrase.split("")
   end
 
+  def find_position(letter)
+    alphabet.index(letter)
+  end
+
+  def letter_to_index(phrase)
+    to_array(phrase).map do |let|
+      find_position(let)
+    end
+  end
+
   def rotate_alphabet(num)
     @alphabet.rotate(num)
   end
@@ -21,7 +31,6 @@ class Enigma
   def use_shift_rotate
     hash = Hash.new(0)
     @shift.combine.each do |k, v|
-      # binding.pry
       hash[k] = rotate_alphabet(v)
     end
     hash
