@@ -3,7 +3,6 @@ require './test/test_helper'
 class ShiftTest < Minitest::Test
 
   def setup
-    # binding.pry
     @key = Key.new
     @offset = Offset.new
     @shift = Shift.new(@key, @offset)
@@ -14,19 +13,24 @@ class ShiftTest < Minitest::Test
   end
 
   def test_shift_has_attributes
-    skip
-    assert_equal ({}), @shift.keys
-    assert_equal ({}), @shift.offsets
+    assert_equal @key, @shift.key
+    assert_equal @offset, @shift.offset
   end
 
   def test_add_keys
-    skip
     assert_equal @key, @shift.add_keys(@key)
   end
 
   def test_add_offsets
-    skip
     assert_equal @offset, @shift.add_offsets(@offset)
+  end
+
+  def test_can_combine_key_and_offset
+    # binding.pry
+    key_1 = Key.new("12345")
+    offset_1 = Offset.new("270819")
+    shift_1 = Shift.new(key_1, offset_1)
+    assert_equal ({:A=>12, :B=>30, :C=>40, :D=>46}), shift_1.combine
   end
 
 

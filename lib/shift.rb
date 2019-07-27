@@ -16,6 +16,10 @@ class Shift
     @offset = offset_1
   end
 
+  def combine
+    @key.key_hash.merge!(@offset.offset_hash) {|k, v1, v2| v1 + v2}
+  end
+
 
 
 end
