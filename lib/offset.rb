@@ -3,7 +3,7 @@ require 'date'
 class Offset
   attr_reader :date, :offset_hash
 
-  def initialize(date = "250719")
+  def initialize(date = current_date)
     @date = date
     @offset_hash = {}
   end
