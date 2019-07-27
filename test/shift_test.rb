@@ -3,6 +3,7 @@ require './test/test_helper'
 class ShiftTest < Minitest::Test
 
   def setup
+    # binding.pry
     @key = Key.new
     @offset = Offset.new
     @shift = Shift.new(@key, @offset)

@@ -5,7 +5,7 @@ class Offset
 
   def initialize(date = current_date)
     @date = date
-    @offset_hash = {}
+    @offset_hash = make_offset_hash
   end
 
   def current_date

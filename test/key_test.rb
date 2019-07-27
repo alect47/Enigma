@@ -3,7 +3,7 @@ require './test/test_helper'
 class KeyTest < Minitest::Test
 
   def setup
-    @key = Key.new("12345")
+    @key = Key.new
   end
 
   def test_key_exists
@@ -11,17 +11,18 @@ class KeyTest < Minitest::Test
   end
 
   def test_generate_random
-    assert_equal 5, @key.generate_random.length
+    assert_equal 5, @key.generate_random_new_number.length
   end
 
-  def test_new_number
-    @key.stubs(:generate_random).returns("13579")
-    assert_equal "13579", @key.new_number
-  end
+  # def test_new_number
+  #   @key.stubs(:generate_random).returns("13579")
+  #   assert_equal "13579", @key.new_number
+  # end
 
   def test_slice_number
-    @key.stubs(:generate_random).returns("13579")
-    @key.new_number
+    @key.stubs(:number).returns("13579")
+    # @key.generate_random_new_number
+    # binding.pry
     assert_equal ["1", "3", "5", "7", "9"], @key.slice_num
   end
 
@@ -37,11 +38,9 @@ class KeyTest < Minitest::Test
   end
 
   def test_can_make_hash_with_input
-    binding.pry
     key_1 = Key.new("72437")
     key_1.make_key_hash
     expected ={:A=>72, :B=>24, :C=>43, :D=>37}
-    binding.pry
     assert_equal expected, key_1.key_hash
   end
 
