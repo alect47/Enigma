@@ -25,6 +25,14 @@ class ShiftTest < Minitest::Test
     assert_equal @offset, @shift.add_offsets(@offset)
   end
 
+  def test_can_combine_key_and_offset
+    # binding.pry
+    key_1 = Key.new("12345")
+    offset_1 = Offset.new("270819")
+    shift_1 = Shift.new(key_1, offset_1)
+    assert_equal ({:A=>12, :B=>30, :C=>40, :D=>46}), shift_1.combine
+  end
+
 
 
   # def test_can_add_alphabet
