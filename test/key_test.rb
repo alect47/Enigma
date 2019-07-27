@@ -23,4 +23,15 @@ class KeyTest < Minitest::Test
     assert_equal ["1", "2", "3", "4", "5"], @key.slice_num
   end
 
+  def test_make_key_hash
+    @key.stubs(:slice_num).returns(["1","3","5","7","9"])
+    expected = {
+      A: 13,
+      B: 35,
+      C: 57,
+      D: 79,
+    }
+    assert_equal expected, @key.make_key_hash
+  end
+
 end

@@ -22,10 +22,10 @@ class Key
 
   def make_key_hash
     @key_hash = {
-      :a => slice_num[0..1].join,
-      :b => slice_num[1..2].join,
-      :c => slice_num[2..3].join,
-      :d => slice_num[3..4].join,
+      A: slice_num[0..1].join.to_i,
+      B: slice_num[1..2].join.to_i,
+      C: slice_num[2..3].join.to_i,
+      D: slice_num[3..4].join.to_i,
     }
   end
 
