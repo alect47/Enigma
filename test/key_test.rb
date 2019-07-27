@@ -3,7 +3,7 @@ require './test/test_helper'
 class KeyTest < Minitest::Test
 
   def setup
-    @key = Key.new
+    @key = Key.new("12345")
   end
 
   def test_key_exists
@@ -20,7 +20,9 @@ class KeyTest < Minitest::Test
   end
 
   def test_slice_number
-    assert_equal ["1", "2", "3", "4", "5"], @key.slice_num
+    @key.stubs(:generate_random).returns("13579")
+    @key.new_number
+    assert_equal ["1", "3", "5", "7", "9"], @key.slice_num
   end
 
   def test_make_key_hash

@@ -1,7 +1,7 @@
 class Key
   attr_reader :number, :key_hash
 
-    def initialize(number = "12345")
+    def initialize(number = new_number)
       @number = number
       @key_hash = Hash.new(0)
     end
