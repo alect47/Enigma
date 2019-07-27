@@ -31,6 +31,7 @@ class ShiftTest < Minitest::Test
     shift_1 = Shift.new(key_1, offset_1)
     assert_equal ({:A=>12, :B=>30, :C=>40, :D=>46}), shift_1.combine
   end
+  
 
 
 

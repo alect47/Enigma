@@ -10,5 +10,21 @@ class Enigma
     @alphabet = ("a".."z").to_a << " "
   end
 
+  def to_array(phrase)
+    phrase.split("")
+  end
+
+  def rotate_alphabet(num)
+    @alphabet.rotate(num)
+  end
+
+  def use_shift_rotate
+    hash = Hash.new(0)
+    @shift.combine.each do |k, v|
+      # binding.pry
+      hash[k] = rotate_alphabet(v)
+    end
+    hash
+  end
 
 end
