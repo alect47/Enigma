@@ -1,8 +1,4 @@
 require './test/test_helper'
-# require 'minitest/autorun'
-# require 'minitest/pride'
-# require './lib/offset'
-# require 'pry'
 
 class OffsetTest < Minitest::Test
 
@@ -16,11 +12,13 @@ class OffsetTest < Minitest::Test
 
   def test_can_find_current_date
     @offset.current_date
-    assert_equal 260719, @offset.date
+    assert_equal "260719", @offset.date
   end
 
   def test_can_square_date
-    assert_equal 62859515524, @offset.square_date
+    # @offset.stubs(:current_date).returns("260719")
+    
+    assert_equal "62860016961", @offset.square_date
   end
 
   def test_can_take_make_keys
