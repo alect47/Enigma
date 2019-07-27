@@ -3,7 +3,7 @@ class Key
 
     def initialize(number = new_number)
       @number = number
-      @key_hash = Hash.new(0)
+      @key_hash = make_key_hash
     end
 
   def generate_random

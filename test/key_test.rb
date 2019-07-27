@@ -37,9 +37,11 @@ class KeyTest < Minitest::Test
   end
 
   def test_can_make_hash_with_input
+    binding.pry
     key_1 = Key.new("72437")
     key_1.make_key_hash
     expected ={:A=>72, :B=>24, :C=>43, :D=>37}
+    binding.pry
     assert_equal expected, key_1.key_hash
   end
 
