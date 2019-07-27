@@ -27,7 +27,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_convert_letter_to_index
-    assert_equal [], @enigma.letter_to_index("hi hello")
+    assert_equal [7, 8, 26, 7, 4, 11, 11, 14], @enigma.letter_to_index("hi hello")
   end
 
   def test_rotate_alphabet
@@ -37,6 +37,15 @@ class EnigmaTest < Minitest::Test
   def test_use_shift_to_rotate_alphabet
     @enigma.shift.stubs(:combine).returns({:A=>1, :B=>2, :C=>3, :D=>4})
     assert_equal "b", @enigma.use_shift_rotate[:A][0]
+  end
+
+  def test_shift_combine
+    assert_equal "", @enigma.shift_combine
+  end
+
+  def test_convert_shift_to_mod
+    binding.pry
+    assert_equal "", @enigma.convert_shift_to_mod
   end
 
 

@@ -36,4 +36,12 @@ class Enigma
     hash
   end
 
+  def convert_shift_to_mod
+    hash = Hash.new(0)
+    @shift.combine.map do |k, v|
+      hash[k] = (v %  27)
+    end
+    hash
+  end
+
 end
