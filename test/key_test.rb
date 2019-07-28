@@ -12,16 +12,11 @@ class KeyTest < Minitest::Test
 
   def test_attributes
     assert_equal "13579", @key.number
-    assert_equal ({:A=>13, :B=>35, :C=>57, :D=>79}), @key.key_hash
+    assert_equal ({}), @key.key_hash
   end
 
   def test_generate_random
     assert_equal 5, @key.generate_random_new_number.length
-  end
-
-  def test_assign_new_num
-    @key.stubs(:generate_random_new_number).returns("47474")
-    assert_equal "47474", @key.assign_new_num
   end
 
   def test_slice_number
@@ -30,7 +25,6 @@ class KeyTest < Minitest::Test
   end
 
   def test_make_key_hash
-    @key.stubs(:slice_num).returns(["1","3","5","7","9"])
     expected = {
       A: 13,
       B: 35,
