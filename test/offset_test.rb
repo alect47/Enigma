@@ -3,10 +3,11 @@ require './test/test_helper'
 class OffsetTest < Minitest::Test
 
   def setup
-    @offset = Offset.new
+    @offset = Offset.new("280819")
   end
 
   def test_offset_exists
+    # binding.pry
     assert_instance_of Offset, @offset
   end
 
@@ -20,16 +21,16 @@ class OffsetTest < Minitest::Test
   end
 
   def test_can_square_date
-    assert_equal "73288776961", @offset.square_date
+    assert_equal "78859310761", @offset.square_date
   end
 
   def test_can_take_make_keys
     @offset.stubs(:square_date).returns("47616614321")
-    assert_equal [4,3,2,1], @offset.make_keys
+    assert_equal ["4","3","2","1"], @offset.make_keys
   end
 
   def test_make_offset_hash
-    @offset.stubs(:make_keys).returns([4,3,2,1])
+    @offset.stubs(:make_keys).returns(["4","3","2","1"])
     expected =  {
       A: 4,
       B: 3,

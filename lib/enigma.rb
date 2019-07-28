@@ -15,7 +15,6 @@ class Enigma
   def new_values(phrase)
     a = []
     letter_to_index(phrase).each_with_index do |num, index|
-      # binding.pry
       if index % 4 == 0
         a << ((num + convert_shift_to_mod[:A]) % 27)
       elsif index % 4 == 1

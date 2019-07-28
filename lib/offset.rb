@@ -18,15 +18,15 @@ class Offset
   end
 
   def make_keys
-    square_date.split('')[-4..-1].map(&:to_i)
+    square_date.split('')[-4..-1]
   end
 
   def make_offset_hash
     @offset_hash = {
-      A: make_keys[0],
-      B: make_keys[1],
-      C: make_keys[2],
-      D: make_keys[3],
+      A: make_keys[0].to_i,
+      B: make_keys[1].to_i,
+      C: make_keys[2].to_i,
+      D: make_keys[3].to_i,
     }
   end
 

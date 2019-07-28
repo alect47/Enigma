@@ -1,23 +1,16 @@
 require 'date'
 
 class Shift
-  attr_reader :key, :offset
+  attr_reader :key_hash, :offset_hash, :shift_hash
 
   def initialize(key, offset)
-    @key = key
-    @offset = offset
-  end
-
-  def add_keys(key_1)
-    @key = key_1
-  end
-
-  def add_offsets(offset_1)
-    @offset = offset_1
+    @key_hash = key.make_key_hash
+    @offset_hash = offset.make_offset_hash
+    @shift_hash = {}
   end
 
   def combine
-    @key.key_hash.merge!(@offset.offset_hash) {|k, v1, v2| v1 + v2}
+    @shift_hash = @key_hash.merge!(@offset_hash) {|k, v1, v2| v1 + v2}
   end
 
 

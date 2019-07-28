@@ -44,6 +44,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_convert_shift_to_mod
+    # binding.pry
     @enigma.stub(:shift).returns({:A=>1, :B=>2, :C=>3, :D=>4})
     assert_equal "", @enigma.convert_shift_to_mod
   end
@@ -54,8 +55,8 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_encrypt
-
-    assert_equal "", @enigma.encrypt("hi hello")
+    expected =
+    assert_equal "", @enigma.encrypt("hi hello", "12345", "280819")
   end
 
 
