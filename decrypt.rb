@@ -10,14 +10,14 @@ require 'pry'
 handle = File.open(ARGV[0], "r")
 
 incoming_text = handle.read
-# binding.pry
 
 handle.close
 
-encrypted_text = @enigma.encrypt(incoming_text.strip)
+decrypted_text = @enigma.decrypt(incoming_text.strip, ARGV[2], ARGV[3])
 # binding.pry
 
+
 writer = File.open(ARGV[1], "w")
-writer.write(encrypted_text[:encryption])
+writer.write(decrypted_text[:decryption])
 writer.close
-puts "Created #{ARGV[1]} with the key #{encrypted_text[:key]} and the date #{encrypted_text[:date]}"
+puts "Created #{ARGV[1]} with the key #{decrypted_text[:key]} and the date #{decrypted_text[:date]}"
