@@ -13,11 +13,11 @@ incoming_text = handle.read
 
 handle.close
 
-downcased_text = incoming_text
-binding.pry
+encrypted_text = @enigma.encrypt(incoming_text.strip)
+# binding.pry
 
 writer = File.open(ARGV[1], "w")
-writer.write(encrypted_text)
+writer.write(encrypted_text[:encryption])
 writer.close
 puts incoming_text
 puts encrypted_text
