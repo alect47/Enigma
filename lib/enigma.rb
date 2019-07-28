@@ -42,37 +42,33 @@ class Enigma
     @alphabet.rotate(num)
   end
 
-  # def create_key(num)
-  #
-  # end
-
-  def use_shift_rotate
+  def use_shift_rotate(key, offset)
     hash = Hash.new(0)
-    @shift.combine.each do |k, v|
+    make_shift_hash(key, offset).each do |k, v|
       hash[k] = rotate_alphabet(v)
     end
     hash
   end
 
-  def convert_shift_to_mod
+  def convert_shift_to_mod(key, offset)
     hash = Hash.new(0)
-    @shift.combine.map do |k, v|
+    make_shift_hash(key, offset).map do |k, v|
       hash[k] = (v %  27)
     end
     hash
   end
 
-  def new_values(phrase)
+  def new_values(phrase, key, offset)
     a = []
     letter_to_index(phrase).each_with_index do |num, index|
       if index % 4 == 0
-        a << ((num + convert_shift_to_mod[:A]) % 27)
+        a << ((num + convert_shift_to_mod(key, offset)[:A]) % 27)
       elsif index % 4 == 1
-        a << ((num + convert_shift_to_mod[:B]) % 27)
+        a << ((num + convert_shift_to_mod(key, offset)[:B]) % 27)
       elsif index % 4 == 2
-        a << ((num + convert_shift_to_mod[:C]) % 27)
+        a << ((num + convert_shift_to_mod(key, offset)[:C]) % 27)
       elsif index % 4 == 3
-        a << ((num + convert_shift_to_mod[:D]) % 27)
+        a << ((num + convert_shift_to_mod(key, offset)[:D]) % 27)
       end
     end
     a
