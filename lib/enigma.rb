@@ -2,7 +2,7 @@ require 'date'
 require './lib/helper'
 
 class Enigma
-  include HelperMethods
+  # include HelperMethods
   attr_reader :key, :offset, :shift, :alphabet
 
   def initialize
@@ -58,7 +58,7 @@ class Enigma
     hash
   end
 
-  def new_values(phrase, key, offset)
+  def encrypted_values(phrase, key, offset)
     a = []
     letter_to_index(phrase).each_with_index do |num, index|
       if index % 4 == 0
@@ -74,9 +74,33 @@ class Enigma
     a
   end
 
+  def decrypted_values(phrase, key, offset)
+    a = []
+    letter_to_index(phrase).each_with_index do |num, index|
+      if index % 4 == 0
+        a << ((num - convert_shift_to_mod(key, offset)[:A]) % 27)
+      elsif index % 4 == 1
+        a << ((num - convert_shift_to_mod(key, offset)[:B]) % 27)
+      elsif index % 4 == 2
+        a << ((num - convert_shift_to_mod(key, offset)[:C]) % 27)
+      elsif index % 4 == 3
+        a << ((num - convert_shift_to_mod(key, offset)[:D]) % 27)
+      end
+    end
+    a
+  end
+
   def encrypt(message, key = @key.number , date = @offset.date)
     hash = {
-    :encryption => (index_to_phrase(new_values(message))),
+    :encryption => (index_to_phrase(encrypted_values(message, key, date))),
+    :key => key,
+    :date => date}
+    hash
+  end
+
+  def decrypt(message, key = @key.number , date = @offset.date)
+    hash = {
+    :decryption => (index_to_phrase(decrypted_values(message, key, date))),
     :key => key,
     :date => date}
     hash
