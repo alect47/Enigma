@@ -3,7 +3,7 @@ require './lib/helper'
 
 class Enigma
   # include HelperMethods
-  attr_reader :key, :offset, :shift, :alphabet
+  attr_reader :alphabet
 
   def initialize
     # @key = Key.new

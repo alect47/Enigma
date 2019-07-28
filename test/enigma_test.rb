@@ -4,9 +4,6 @@ class EnigmaTest < Minitest::Test
 
   def setup
     @enigma = Enigma.new
-    @key = Key.new("12345")
-    @offset = Offset.new("280819")
-    @shift = Shift.new(@key, @offset)
   end
 
   def test_it_exists
@@ -14,9 +11,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_attributes
-    # assert_instance_of Key, @enigma.key
-    # assert_instance_of Offset, @enigma.offset
-    # assert_instance_of Shift, @enigma.shift
     assert_equal ("a".."z").to_a << " ", @enigma.alphabet
   end
 
@@ -46,7 +40,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_use_shift_to_rotate_alphabet
-    # @enigma.stubs(:make_shift_hash).returns({:A=>1, :B=>2, :C=>3, :D=>4})
     assert_equal "m", @enigma.use_shift_rotate("12345", "280819")[:A][0]
   end
 
@@ -56,19 +49,47 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_add_key_value_to_letter_index
-    # skip
-    # @enigma.stubs(:convert_shift_to_mod).returns({:A=>25, :B=>23, :C=>3, :D=>1})
     assert_equal [19, 11, 12, 26, 16, 14, 24, 6], @enigma.encrypted_values("hi hello", "12345", "280819")
   end
 
   def test_encrypt
-    expected =
-    assert_equal "", @enigma.encrypt("hi hello", "12345", "280819")
+    expected = {
+      encryption: "keder ohulw",
+      key: "02715",
+      date: "040895"
+    }
+    assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
   end
 
   def test_decrypt
-    assert_equal "", @enigma.decrypt("tlm qoyg", "12345", "280819")
+    expected = {
+      decryption: "hello world",
+      key: "02715",
+      date: "040895"
+    }
+    assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
   end
 
+  def test_encrypt_with_no_date
+    expected = {
+      encryption: "pnhawisdzu ",
+      key: "02715",
+      date: "280719"
+    }
+    assert_equal expected, @enigma.encrypt("hello world", "02715")
+  end
 
+  def test_encrypt_with_no_date_or_key
+    assert_instance_of Hash, @enigma.encrypt("hello world")
+  end
+
+  def test_decrypt_no_date
+    expected = {
+      decryption: "hello world",
+      key: "02715",
+      date: "280719"
+    }
+    encrypted = @enigma.encrypt("hello world", "02715")
+    assert_equal expected, @enigma.decrypt(encrypted[:encryption], "02715")
+  end
 end
