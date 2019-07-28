@@ -4,6 +4,9 @@ class EnigmaTest < Minitest::Test
 
   def setup
     @enigma = Enigma.new
+    @key = Key.new("12345")
+    @offset = Offset.new("280819")
+    @shift = Shift.new(@key, @offset)
   end
 
   def test_it_exists
@@ -11,10 +14,14 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_attributes
-    assert_instance_of Key, @enigma.key
-    assert_instance_of Offset, @enigma.offset
-    assert_instance_of Shift, @enigma.shift
+    # assert_instance_of Key, @enigma.key
+    # assert_instance_of Offset, @enigma.offset
+    # assert_instance_of Shift, @enigma.shift
     assert_equal ("a".."z").to_a << " ", @enigma.alphabet
+  end
+
+  def test_make_shift_hash
+    assert_equal ({:A=>12, :B=>30, :C=>40, :D=>46}), @enigma.make_shift_hash("12345", "280819")
   end
 
   def test_convert_message_to_array
@@ -38,23 +45,31 @@ class EnigmaTest < Minitest::Test
     assert_equal "d", @enigma.rotate_alphabet(3)[0]
   end
 
+  # def test_create_key
+  #   assert_instance_of Key, @enigma.create_key("01134")
+  # end
+
   def test_use_shift_to_rotate_alphabet
+    skip
     @enigma.shift.stubs(:combine).returns({:A=>1, :B=>2, :C=>3, :D=>4})
     assert_equal "b", @enigma.use_shift_rotate[:A][0]
   end
 
   def test_convert_shift_to_mod
+    skip
     # binding.pry
     @enigma.stub(:shift).returns({:A=>1, :B=>2, :C=>3, :D=>4})
     assert_equal "", @enigma.convert_shift_to_mod
   end
 
   def test_add_key_value_to_letter_index
+    skip
     @enigma.stubs(:convert_shift_to_mod).returns({:A=>25, :B=>23, :C=>3, :D=>1})
     assert_equal [5, 4, 2, 8, 2, 7, 14, 15], @enigma.new_values("hi hello")
   end
 
   def test_encrypt
+    skip
     expected =
     assert_equal "", @enigma.encrypt("hi hello", "12345", "280819")
   end

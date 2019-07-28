@@ -7,7 +7,6 @@ class OffsetTest < Minitest::Test
   end
 
   def test_offset_exists
-    # binding.pry
     assert_instance_of Offset, @offset
   end
 
