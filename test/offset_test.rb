@@ -11,8 +11,7 @@ class OffsetTest < Minitest::Test
   end
 
   def test_attributes
-    expected = {:A=>6, :B=>9, :C=>6, :D=>1}
-    assert_equal expected, @offset.offset_hash
+    assert_equal ({}), @offset.offset_hash
   end
 
   def test_can_find_current_date

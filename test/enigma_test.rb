@@ -44,18 +44,18 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_convert_shift_to_mod
-    # binding.pry
+    @enigma.stub(:shift).returns({:A=>1, :B=>2, :C=>3, :D=>4})
     assert_equal "", @enigma.convert_shift_to_mod
   end
 
   def test_add_key_value_to_letter_index
-    # binding.pry
-    assert_equal [9, 8, 6, 7, 4, 11, 11, 14], @enigma.new_values("hi hello")
+    @enigma.stubs(:convert_shift_to_mod).returns({:A=>25, :B=>23, :C=>3, :D=>1})
+    assert_equal [5, 4, 2, 8, 2, 7, 14, 15], @enigma.new_values("hi hello")
   end
 
   def test_encrypt
 
-    assert_equal "", @enigma.encrypt("hi hello", "12345", "270819")
+    assert_equal "", @enigma.encrypt("hi hello")
   end
 
 
