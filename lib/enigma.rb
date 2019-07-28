@@ -28,13 +28,21 @@ class Enigma
 
   def letter_to_index(phrase)
     to_array(phrase).map do |let|
-      find_position(let)
+      if @alphabet.include?(let.downcase)
+        find_position(let.downcase)
+      else
+        let = let
+      end
     end
   end
 
   def index_to_phrase(arr)
     arr.map do |num|
-      alphabet[num]
+      if num.is_a? Integer
+        alphabet[num]
+      else
+        num
+      end
     end.join
   end
 
@@ -61,14 +69,16 @@ class Enigma
   def encrypted_values(phrase, key, offset)
     a = []
     letter_to_index(phrase).each_with_index do |num, index|
-      if index % 4 == 0
+      if (num.is_a? Integer) && index % 4 == 0
         a << ((num + convert_shift_to_mod(key, offset)[:A]) % 27)
-      elsif index % 4 == 1
+      elsif (num.is_a? Integer) && index % 4 == 1
         a << ((num + convert_shift_to_mod(key, offset)[:B]) % 27)
-      elsif index % 4 == 2
+      elsif (num.is_a? Integer) && index % 4 == 2
         a << ((num + convert_shift_to_mod(key, offset)[:C]) % 27)
-      elsif index % 4 == 3
+      elsif (num.is_a? Integer) && index % 4 == 3
         a << ((num + convert_shift_to_mod(key, offset)[:D]) % 27)
+      else
+        a << num
       end
     end
     a
@@ -77,14 +87,16 @@ class Enigma
   def decrypted_values(phrase, key, offset)
     a = []
     letter_to_index(phrase).each_with_index do |num, index|
-      if index % 4 == 0
+      if (num.is_a? Integer) && index % 4 == 0
         a << ((num - convert_shift_to_mod(key, offset)[:A]) % 27)
-      elsif index % 4 == 1
+      elsif (num.is_a? Integer) && index % 4 == 1
         a << ((num - convert_shift_to_mod(key, offset)[:B]) % 27)
-      elsif index % 4 == 2
+      elsif (num.is_a? Integer) && index % 4 == 2
         a << ((num - convert_shift_to_mod(key, offset)[:C]) % 27)
-      elsif index % 4 == 3
+      elsif (num.is_a? Integer) && index % 4 == 3
         a << ((num - convert_shift_to_mod(key, offset)[:D]) % 27)
+      else
+        a << num
       end
     end
     a
