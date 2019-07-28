@@ -65,14 +65,16 @@ class Enigma
   def encrypted_values(phrase, key, offset)
     a = []
     letter_to_index(phrase).each_with_index do |num, index|
-      if index % 4 == 0
+      if (num.is_a? Integer) && index % 4 == 0
         a << ((num + convert_shift_to_mod(key, offset)[:A]) % 27)
-      elsif index % 4 == 1
+      elsif (num.is_a? Integer) && index % 4 == 1
         a << ((num + convert_shift_to_mod(key, offset)[:B]) % 27)
-      elsif index % 4 == 2
+      elsif (num.is_a? Integer) && index % 4 == 2
         a << ((num + convert_shift_to_mod(key, offset)[:C]) % 27)
-      elsif index % 4 == 3
+      elsif (num.is_a? Integer) && index % 4 == 3
         a << ((num + convert_shift_to_mod(key, offset)[:D]) % 27)
+      else
+        a << num
       end
     end
     a
@@ -81,14 +83,16 @@ class Enigma
   def decrypted_values(phrase, key, offset)
     a = []
     letter_to_index(phrase).each_with_index do |num, index|
-      if index % 4 == 0
+      if (num.is_a? Integer) && index % 4 == 0
         a << ((num - convert_shift_to_mod(key, offset)[:A]) % 27)
-      elsif index % 4 == 1
+      elsif (num.is_a? Integer) && index % 4 == 1
         a << ((num - convert_shift_to_mod(key, offset)[:B]) % 27)
-      elsif index % 4 == 2
+      elsif (num.is_a? Integer) && index % 4 == 2
         a << ((num - convert_shift_to_mod(key, offset)[:C]) % 27)
-      elsif index % 4 == 3
+      elsif (num.is_a? Integer) && index % 4 == 3
         a << ((num - convert_shift_to_mod(key, offset)[:D]) % 27)
+      else
+        a << num
       end
     end
     a
@@ -96,7 +100,7 @@ class Enigma
 
   def encrypt(message, key = Key.new.number , date = Offset.new.date)
     hash = {
-    :encryption => (index_to_phrase(encrypted_values(message.downcase.strip, key, date))),
+    :encryption => (index_to_phrase(encrypted_values(message, key, date))),
     :key => key,
     :date => date}
     hash
@@ -104,7 +108,7 @@ class Enigma
 
   def decrypt(message, key = Key.new.number , date = Offset.new.date)
     hash = {
-    :decryption => (index_to_phrase(decrypted_values(message.downcase.strip, key, date))),
+    :decryption => (index_to_phrase(decrypted_values(message, key, date))),
     :key => key,
     :date => date}
     hash

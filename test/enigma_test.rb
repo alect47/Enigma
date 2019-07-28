@@ -28,7 +28,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_convert_letter_to_index
-    assert_equal [7, 8, 26, 7, 4, 11, 11, 14], @enigma.letter_to_index("Hi hello!")
+    assert_equal [7, 8, 26, 7, 4, 11, 11, 14, "!"], @enigma.letter_to_index("Hi hello!")
   end
 
   def test_convert_index_to_phrase
@@ -48,8 +48,12 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.convert_shift_to_mod("12345", "280819")
   end
 
-  def test_add_key_value_to_letter_index
-    assert_equal [19, 11, 12, 26, 16, 14, 24, 6], @enigma.encrypted_values("hi hello", "12345", "280819")
+  def test_encrypt_values
+    assert_equal [19, 11, 12, 26, 16, 14, 24, 6, "!"], @enigma.encrypted_values("Hi hello!", "12345", "280819")
+  end
+
+  def test_decrypt_values
+    assert_equal [7, 4, 11, 11, 14, 26, 22, 14, 17, 11, 3, "!"], @enigma.decrypted_values("keder ohulw!", "02715", "040895")
   end
 
   def test_encrypt
