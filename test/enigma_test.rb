@@ -19,8 +19,8 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_convert_message_to_array
-    expected = ["h", "i", " ", "h", "e", "l", "l", "o"]
-    assert_equal expected, @enigma.to_array("hi hello")
+    expected = ["H", "i", " ", "h", "e", "l", "l", "o", "!"]
+    assert_equal expected, @enigma.to_array("Hi hello!")
   end
 
   def test_find_alphabet_index
@@ -28,7 +28,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_convert_letter_to_index
-    assert_equal [7, 8, 26, 7, 4, 11, 11, 14], @enigma.letter_to_index("hi hello")
+    assert_equal [7, 8, 26, 7, 4, 11, 11, 14], @enigma.letter_to_index("Hi hello!")
   end
 
   def test_convert_index_to_phrase

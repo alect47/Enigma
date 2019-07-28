@@ -28,7 +28,11 @@ class Enigma
 
   def letter_to_index(phrase)
     to_array(phrase).map do |let|
-      find_position(let)
+      if @alphabet.include?(let.downcase)
+        find_position(let.downcase)
+      else
+        let = let
+      end
     end
   end
 
@@ -92,7 +96,7 @@ class Enigma
 
   def encrypt(message, key = Key.new.number , date = Offset.new.date)
     hash = {
-    :encryption => (index_to_phrase(encrypted_values(message, key, date))),
+    :encryption => (index_to_phrase(encrypted_values(message.downcase.strip, key, date))),
     :key => key,
     :date => date}
     hash
@@ -100,7 +104,7 @@ class Enigma
 
   def decrypt(message, key = Key.new.number , date = Offset.new.date)
     hash = {
-    :decryption => (index_to_phrase(decrypted_values(message, key, date))),
+    :decryption => (index_to_phrase(decrypted_values(message.downcase.strip, key, date))),
     :key => key,
     :date => date}
     hash
