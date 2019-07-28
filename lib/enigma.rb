@@ -24,10 +24,10 @@ class Enigma
     end
   end
 
-  def index_to_letter(arr)
+  def index_to_phrase(arr)
     arr.map do |num|
       alphabet[num]
-    end
+    end.join
   end
 
   def rotate_alphabet(num)
@@ -65,6 +65,14 @@ class Enigma
       end
     end
     a
+  end
+
+  def encrypt(message, key, date)
+    hash = {
+    :encryption => (index_to_phrase(new_values(message))),
+    :key => Key.new(key),
+    :date => Offset.new(date)}
+    hash
   end
 
 end

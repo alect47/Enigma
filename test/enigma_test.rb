@@ -31,8 +31,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_convert_index_to_letter
-    expected = ["h", "i", " ", "h", "e", "l", "l", "o"]
-    assert_equal expected, @enigma.index_to_letter([7, 8, 26, 7, 4, 11, 11, 14])
+    assert_equal "hi hello", @enigma.index_to_phrase([7, 8, 26, 7, 4, 11, 11, 14])
   end
 
   def test_rotate_alphabet
@@ -52,6 +51,11 @@ class EnigmaTest < Minitest::Test
   def test_add_key_value_to_letter_index
     # binding.pry
     assert_equal [9, 8, 6, 7, 4, 11, 11, 14], @enigma.new_values("hi hello")
+  end
+
+  def test_encrypt
+
+    assert_equal "", @enigma.encrypt("hi hello", "12345", "270819")
   end
 
 
