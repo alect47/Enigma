@@ -38,7 +38,11 @@ class Enigma
 
   def index_to_phrase(arr)
     arr.map do |num|
-      alphabet[num]
+      if num.is_a? Integer
+        alphabet[num]
+      else
+        num
+      end
     end.join
   end
 

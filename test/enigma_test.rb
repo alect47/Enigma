@@ -32,7 +32,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_convert_index_to_phrase
-    assert_equal "hi hello", @enigma.index_to_phrase([7, 8, 26, 7, 4, 11, 11, 14])
+    assert_equal "hi hello!", @enigma.index_to_phrase([7, 8, 26, 7, 4, 11, 11, 14, "!"])
   end
 
   def test_rotate_alphabet
@@ -58,20 +58,20 @@ class EnigmaTest < Minitest::Test
 
   def test_encrypt
     expected = {
-      encryption: "keder ohulw",
+      encryption: "keder ohulw!",
       key: "02715",
       date: "040895"
     }
-    assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
+    assert_equal expected, @enigma.encrypt("Hello world!", "02715", "040895")
   end
 
   def test_decrypt
     expected = {
-      decryption: "hello world",
+      decryption: "hello world!",
       key: "02715",
       date: "040895"
     }
-    assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
+    assert_equal expected, @enigma.decrypt("keder ohulw!", "02715", "040895")
   end
 
   def test_encrypt_with_no_date
