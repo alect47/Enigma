@@ -90,7 +90,7 @@ class Enigma
     a
   end
 
-  def encrypt(message, key = @key.number , date = @offset.date)
+  def encrypt(message, key = Key.new.number , date = Offset.new.date)
     hash = {
     :encryption => (index_to_phrase(encrypted_values(message, key, date))),
     :key => key,
@@ -98,7 +98,7 @@ class Enigma
     hash
   end
 
-  def decrypt(message, key = @key.number , date = @offset.date)
+  def decrypt(message, key = Key.new.number , date = Offset.new.date)
     hash = {
     :decryption => (index_to_phrase(decrypted_values(message, key, date))),
     :key => key,
