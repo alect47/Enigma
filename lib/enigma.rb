@@ -3,10 +3,10 @@ require './lib/helper'
 
 class Enigma
   # include HelperMethods
-  attr_reader :alphabet
+  attr_reader :alphabet, :key
 
   def initialize
-    # @key = Key.new
+    @key = Key.new
     # @offset = Offset.new
     # @shift = Shift.new(@key, @offset)
     @alphabet = ("a".."z").to_a << " "
@@ -116,6 +116,36 @@ class Enigma
     :key => key,
     :date => date}
     hash
+  end
+
+  def find_last_four(message)
+    message[-4..-1]
+  end
+
+  # def count_up_keys
+  #   range = (0..99)
+  #   number = "00"
+  #   range.each do |n|
+  #     number = ("0" * (2 - n.to_s.length) + n.to_s)
+  #     n += 1
+  #   end
+  #   @key.number = "000" + number
+  # end
+  def count_up_keys
+    # n = 0
+    @key.number = "000" + ("0" * (2 - 0.to_s.length) + 0.to_s)
+    n += 1
+    # @key.number = "000" + number
+  end
+
+  def cycle_through_keys(message, key = count_up_keys, date)
+    loop do encrypt(message, key, date)
+    end
+
+  end
+
+  def find_key(message, e_message, key = Key.new.number, date)
+    encrypt(message, key, date)
   end
 
 end
