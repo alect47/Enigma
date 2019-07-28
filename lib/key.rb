@@ -1,6 +1,6 @@
 class Key
 
-  attr_reader :number, :key_hash
+  attr_accessor :number, :key_hash
 
     def initialize(number = generate_random_new_number)
       @number = number
