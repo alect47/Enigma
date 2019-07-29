@@ -143,19 +143,6 @@ class Enigma
     number_2
   end
 
-  def find_key_letter_at_last_d(message)
-    a = message.split("")
-    b = {}
-    a.each_with_index do |let, index|
-      if index % 4 == 3
-        b[let] = index
-      end
-    end
-    b.max_by do |k, v|
-      v
-    end
-  end
-
   def find_shift_of_last_four(message)
     a = message.split("")
     b = {}
@@ -173,15 +160,51 @@ class Enigma
     b
   end
 
+  def order_last_four(message)
+    a = find_shift_of_last_four(message)
+    c = a.sort_by do |k, v|
+      v[1]
+    end
+    # d = {}
+    # c.each do |n|
+    #   d[n[0]] = n[1]
+    # end
+    # d
+  end
+
+  def find_expected_last_four(message)
+    b = [" ", "e", "n", "d"]
+    a = {}
+    order_last_four(message).each_with_index do |n, index|
+      a[n[0]] = b[index]
+    end
+    a
+  end
+
+  #   a[:D]
+  # end
+
   def cycle_through_keys(e_message, date)
     #this will return an array with ["h", 11]
-    a = find_key_letter_at_last_d(e_message)
+
+    a = find_shift_of_last_four(e_message)
     count_up_keys.find do |key|
       decrypted = decrypt(e_message, key, date)
-        decrypted[:decryption][a[1]] == " "
+        decrypted[:decryption][a[:D][1]] == " "
     end
   end
 
 
-
 end
+# def find_key_letter_at_last_d(message)
+#   a = message.split("")
+#   b = {}
+#   a.each_with_index do |let, index|
+#     if index % 4 == 3
+#       b[let] = index
+#     end
+#   end
+#   b.max_by do |k, v|
+#     v
+#   end
+# end
