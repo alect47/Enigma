@@ -122,30 +122,81 @@ class Enigma
     message[-4..-1]
   end
 
-  # def count_up_keys
-  #   range = (0..99)
-  #   number = "00"
-  #   range.each do |n|
-  #     number = ("0" * (2 - n.to_s.length) + n.to_s)
-  #     n += 1
-  #   end
-  #   @key.number = "000" + number
-  # end
   def count_up_keys
-    # n = 0
-    @key.number = "000" + ("0" * (2 - 0.to_s.length) + 0.to_s)
-    n += 1
-    # @key.number = "000" + number
-  end
-
-  def cycle_through_keys(message, key = count_up_keys, date)
-    loop do encrypt(message, key, date)
+    range = (0..99)
+    number = "00"
+    number_2 = []
+    range.each do |n|
+      @key.number = "000" + ("0" * (2 - n.to_s.length) + n.to_s)
+      n += 1
     end
-
+    @key.number
   end
 
-  def find_key(message, e_message, key = Key.new.number, date)
-    encrypt(message, key, date)
+  def count_up_keys
+    range = (0..99)
+    number_2 = []
+    range.each do |n|
+      number_2 << ("000" + ("0" * (2 - n.to_s.length) + n.to_s))
+      n += 1
+    end
+    number_2
   end
+
+  def find_shift_of_last_four(message)
+    a = message.split("")
+    b = {}
+    a.each_with_index do |let, index|
+      if index % 4 == 3
+        b[:D] = [let, index]
+      elsif index % 4 == 2
+        b[:C] = [let, index]
+      elsif index % 4 == 1
+        b[:B] = [let, index]
+      elsif index % 4 == 0
+        b[:A] = [let, index]
+      end
+    end
+    b
+  end
+
+  def order_last_four(message)
+    a = find_shift_of_last_four(message)
+    a.sort_by do |k, v|
+      v[1]
+    end
+  end
+
+  def find_expected_last_four(message)
+    b = [" ", "e", "n", "d"]
+    a = {}
+    order_last_four(message).each_with_index do |n, index|
+      a[n[0]] = b[index]
+    end
+    a
+  end
+
+  def cycle_through_keys(e_message, date)
+    #this will return an array with ["h", 11]
+
+    a = find_shift_of_last_four(e_message)
+    count_up_keys.find do |key|
+      decrypted = decrypt(e_message, key, date)
+        decrypted[:decryption][a[:D][1]] == find_expected_last_four(e_message)[:D]
+    end
+  end
+
 
 end
+# def find_key_letter_at_last_d(message)
+#   a = message.split("")
+#   b = {}
+#   a.each_with_index do |let, index|
+#     if index % 4 == 3
+#       b[let] = index
+#     end
+#   end
+#   b.max_by do |k, v|
+#     v
+#   end
+# end
