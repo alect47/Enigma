@@ -103,8 +103,9 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_cycle_through_d_keys
-    @enigma.encrypt("hello world end", "08304", "291018")
-    assert_equal "", @enigma.cycle_through_d_keys("vjqtbeaweqihssi", "291018")
+    # assert_equal "", @enigma.encrypt("hello world end", "17344", "291018")
+
+    assert_equal "17344", @enigma.cycle_through_d_keys("d ufkveingmuaim", "291018")
   end
 
   def test_order_last_four

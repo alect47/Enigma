@@ -6,7 +6,6 @@ class Enigma
   attr_reader :alphabet, :key
 
   def initialize
-    @key = Key.new
     @alphabet = ("a".."z").to_a << " "
   end
 
@@ -117,7 +116,7 @@ class Enigma
   end
 
   def count_up_keys
-    range = (0..9999)
+    range = (0..99999)
     number_2 = []
     range.each do |n|
       number_2 << ("0" * (5 - n.to_s.length) + n.to_s)
