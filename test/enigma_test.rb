@@ -76,9 +76,7 @@ class EnigmaTest < Minitest::Test
 
   def test_encrypt_with_no_date
     expected = {
-      encryption: "pnhawisdzu ",
-      key: "02715",
-      date: "280719"
+      :encryption=>"pnhawisdzu ", :key=>"02715", :date=>"290719"
     }
     assert_equal expected, @enigma.encrypt("hello world", "02715")
   end
@@ -89,16 +87,10 @@ class EnigmaTest < Minitest::Test
 
   def test_decrypt_no_date
     expected = {
-      decryption: "hello world",
-      key: "02715",
-      date: "280719"
+      :decryption=>"hello world", :key=>"02715", :date=>"290719"
     }
     encrypted = @enigma.encrypt("hello world", "02715")
     assert_equal expected, @enigma.decrypt(encrypted[:encryption], "02715")
-  end
-
-  def test_find_last_four
-    assert_equal "sage", @enigma.find_last_four("this message")
   end
 
   def test_count_up_keys
@@ -106,26 +98,19 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_find_shift_of_last_four
-    assert_equal "", @enigma.find_shift_of_last_four("vjqtbeawesjjsjsdfkjhfdfi")
+    expected = {:A=>["f", 20], :B=>["d", 21], :C=>["f", 22], :D=>["i", 23]}
+    assert_equal expected, @enigma.find_shift_of_last_four("vjqtbeawesjjsjsdfkjhfdfi")
   end
 
-  def test_cycle_through_keys
+  def test_cycle_through_d_keys
     @enigma.encrypt("hello world end", "08304", "291018")
-    # binding.pry
-    assert_equal "", @enigma.cycle_through_keys("vjqtbeaweqihssi", "291018")
+    assert_equal "", @enigma.cycle_through_d_keys("vjqtbeaweqihssi", "291018")
   end
 
   def test_order_last_four
-    assert_equal "", @enigma.order_last_four("vjqtbeaweqsdfsdfihhsdsi")
+    expected = [[:D, ["s", 19]], [:A, ["d", 20]], [:B, ["s", 21]], [:C, ["i", 22]]]
+    assert_equal expected, @enigma.order_last_four("vjqtbeaweqsdfsdfihhsdsi")
   end
-
-  def test_find_expected_last_four
-    assert_equal "", @enigma.find_expected_last_four("vjqtbeaweqsdfsdfihhsdsi")
-  end
-
-  # def test_find_key_letter_at_last_d
-  #   assert_equal "", @enigma.find_key_letter_at_last_d("vjqtbdjheaweqihjssi")
-  # end
 
 
   end
