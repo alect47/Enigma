@@ -102,7 +102,21 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_count_up_keys
-    assert_equal "", @enigma.count_up_keys
+    assert_instance_of Array, @enigma.count_up_keys
+  end
+
+  def test_cycle_through_keys
+    @enigma.encrypt("hello world end", "08304", "291018")
+    # binding.pry
+    assert_equal "", @enigma.cycle_through_keys("vjqtbeaweqihssi", "291018")
+  end
+
+  def test_find_key_letter_at_last_d
+    assert_equal "", @enigma.find_key_letter_at_last_d("vjqtbeaweqihssi")
+  end
+
+  def test_find_shift_of_last_four
+    assert_equal "", @enigma.find_shift_of_last_four("vjqtbeaweqihssi")
   end
 
   end

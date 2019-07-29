@@ -143,15 +143,45 @@ class Enigma
     number_2
   end
 
-  def cycle_through_keys(message, key = "00000", date)
-    loop do encrypt(message, key, date)
-      count_up_keys
+  def find_key_letter_at_last_d(message)
+    a = message.split("")
+    b = {}
+    a.each_with_index do |let, index|
+      if index % 4 == 3
+        b[let] = index
+      end
     end
-
+    b.max_by do |k, v|
+      v
+    end
   end
 
-  def find_key(message, e_message, key = Key.new.number, date)
-    encrypt(message, key, date)
+  def find_shift_of_last_four(message)
+    a = message.split("")
+    b = {}
+    a.each_with_index do |let, index|
+      if index % 4 == 3
+        b[:D] = [let, index]
+      elsif index % 4 == 2
+        b[:C] = [let, index]
+      elsif index % 4 == 1
+        b[:B] = [let, index]
+      elsif index % 4 == 0
+        b[:A] = [let, index]
+      end
+    end
+    b
   end
+
+  def cycle_through_keys(e_message, date)
+    #this will return an array with ["h", 11]
+    a = find_key_letter_at_last_d(e_message)
+    count_up_keys.find do |key|
+      decrypted = decrypt(e_message, key, date)
+        decrypted[:decryption][a[1]] == " "
+    end
+  end
+
+
 
 end
