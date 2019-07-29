@@ -162,14 +162,9 @@ class Enigma
 
   def order_last_four(message)
     a = find_shift_of_last_four(message)
-    c = a.sort_by do |k, v|
+    a.sort_by do |k, v|
       v[1]
     end
-    # d = {}
-    # c.each do |n|
-    #   d[n[0]] = n[1]
-    # end
-    # d
   end
 
   def find_expected_last_four(message)
@@ -181,16 +176,13 @@ class Enigma
     a
   end
 
-  #   a[:D]
-  # end
-
   def cycle_through_keys(e_message, date)
     #this will return an array with ["h", 11]
 
     a = find_shift_of_last_four(e_message)
     count_up_keys.find do |key|
       decrypted = decrypt(e_message, key, date)
-        decrypted[:decryption][a[:D][1]] == " "
+        decrypted[:decryption][a[:D][1]] == find_expected_last_four(e_message)[:D]
     end
   end
 

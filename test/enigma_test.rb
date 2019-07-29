@@ -112,15 +112,15 @@ class EnigmaTest < Minitest::Test
   def test_cycle_through_keys
     @enigma.encrypt("hello world end", "08304", "291018")
     # binding.pry
-    assert_equal "", @enigma.cycle_through_keys("vjqtbeaweqihsdsi", "291018")
+    assert_equal "", @enigma.cycle_through_keys("vjqtbeaweqihssi", "291018")
   end
 
   def test_order_last_four
-    assert_equal "", @enigma.order_last_four("vjqtbeaweqsdfsdfihsdsi")
+    assert_equal "", @enigma.order_last_four("vjqtbeaweqsdfsdfihhsdsi")
   end
 
   def test_find_expected_last_four
-    assert_equal "", @enigma.find_expected_last_four("vjqtbeaweqsdfsdfihsdsi")
+    assert_equal "", @enigma.find_expected_last_four("vjqtbeaweqsdfsdfihhsdsi")
   end
 
   # def test_find_key_letter_at_last_d
