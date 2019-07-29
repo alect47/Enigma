@@ -102,9 +102,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_count_up_keys
-    @enigma.count_up_keys
-    @enigma.count_up_keys
-    assert_equal "", @enigma.key.number
+    assert_equal "", @enigma.count_up_keys
   end
 
   end

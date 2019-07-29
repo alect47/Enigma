@@ -122,24 +122,30 @@ class Enigma
     message[-4..-1]
   end
 
-  # def count_up_keys
-  #   range = (0..99)
-  #   number = "00"
-  #   range.each do |n|
-  #     number = ("0" * (2 - n.to_s.length) + n.to_s)
-  #     n += 1
-  #   end
-  #   @key.number = "000" + number
-  # end
   def count_up_keys
-    # n = 0
-    @key.number = "000" + ("0" * (2 - 0.to_s.length) + 0.to_s)
-    n += 1
-    # @key.number = "000" + number
+    range = (0..99)
+    number = "00"
+    number_2 = []
+    range.each do |n|
+      @key.number = "000" + ("0" * (2 - n.to_s.length) + n.to_s)
+      n += 1
+    end
+    @key.number
   end
 
-  def cycle_through_keys(message, key = count_up_keys, date)
+  def count_up_keys
+    range = (0..99)
+    number_2 = []
+    range.each do |n|
+      number_2 << ("000" + ("0" * (2 - n.to_s.length) + n.to_s))
+      n += 1
+    end
+    number_2
+  end
+
+  def cycle_through_keys(message, key = "00000", date)
     loop do encrypt(message, key, date)
+      count_up_keys
     end
 
   end
