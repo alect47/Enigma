@@ -7,8 +7,6 @@ class Enigma
 
   def initialize
     @key = Key.new
-    # @offset = Offset.new
-    # @shift = Shift.new(@key, @offset)
     @alphabet = ("a".."z").to_a << " "
   end
 
@@ -118,26 +116,11 @@ class Enigma
     hash
   end
 
-  def find_last_four(message)
-    message[-4..-1]
-  end
-
   def count_up_keys
-    range = (0..99)
-    number = "00"
+    range = (0..9999)
     number_2 = []
     range.each do |n|
-      @key.number = "000" + ("0" * (2 - n.to_s.length) + n.to_s)
-      n += 1
-    end
-    @key.number
-  end
-
-  def count_up_keys
-    range = (0..99)
-    number_2 = []
-    range.each do |n|
-      number_2 << ("000" + ("0" * (2 - n.to_s.length) + n.to_s))
+      number_2 << ("0" * (5 - n.to_s.length) + n.to_s)
       n += 1
     end
     number_2
@@ -176,27 +159,16 @@ class Enigma
     a
   end
 
-  def cycle_through_keys(e_message, date)
-    #this will return an array with ["h", 11]
-
+  def cycle_through_d_keys(e_message, date)
     a = find_shift_of_last_four(e_message)
     count_up_keys.find do |key|
       decrypted = decrypt(e_message, key, date)
-        decrypted[:decryption][a[:D][1]] == find_expected_last_four(e_message)[:D]
+        decrypted[:decryption][a[:D][1]] == find_expected_last_four(e_message)[:D] &&
+        decrypted[:decryption][a[:C][1]] == find_expected_last_four(e_message)[:C] &&
+        decrypted[:decryption][a[:B][1]] == find_expected_last_four(e_message)[:B] &&
+        decrypted[:decryption][a[:A][1]] == find_expected_last_four(e_message)[:A]
     end
   end
 
 
 end
-# def find_key_letter_at_last_d(message)
-#   a = message.split("")
-#   b = {}
-#   a.each_with_index do |let, index|
-#     if index % 4 == 3
-#       b[let] = index
-#     end
-#   end
-#   b.max_by do |k, v|
-#     v
-#   end
-# end
