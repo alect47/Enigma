@@ -30,5 +30,4 @@ class Offset
     }
   end
 
-
 end
