@@ -47,7 +47,7 @@ class EnigmaTest < Minitest::Test
 
   def test_encrypt_with_no_date
     expected = {
-      :encryption=>"pnhawisdzu ", :key=>"02715", :date=>"290719"
+      :encryption=>"pnhawisdzu ", :key=>"02715", :date=>"300719"
     }
     assert_equal expected, @enigma.encrypt("hello world", "02715")
   end
@@ -57,32 +57,34 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_decrypt_no_date
-    expected = {
-      :decryption=>"hello world", :key=>"02715", :date=>"290719"
-    }
     encrypted = @enigma.encrypt("hello world", "02715")
-    assert_equal expected, @enigma.decrypt(encrypted[:encryption], "02715")
+    assert_equal "hello world", @enigma.decrypt(encrypted[:encryption], "02715")[:decryption]
   end
 
   def test_find_keys
-    skip
     @enigma.encrypt("hello world end", "08304", "291018")
     assert_equal "08304", @enigma.find_keys("vjqtbeaweqihssi", "291018")
   end
 
-  def test_find_keys_no_date
-    skip
-    @enigma.encrypt("hello world end", "08304", "291018")
-    assert_equal "08304", @enigma.find_keys_no_date("vjqtbeaweqihssi", "2910818")
-  end
 
   def test_crack
-    skip
-    # @enigma.encrypt("hello world end", "08304", "291018")
-    # expected = {:decryption=>"hello world end", :key=>"08304", :date=>"291018"}
-    # assert_equal expected, @enigma.crack("vjqtbeaweqihssi", "291018")
-    assert_equal "", @enigma.crack("vjqtbeaweqihssi")
+    @enigma.encrypt("hello world end", "08304", "291018")
+    expected = {:decryption=>"hello world end", :key=>"08304", :date=>"291018"}
+    assert_equal expected, @enigma.crack("vjqtbeaweqihssi", "291018")
+    # assert_equal "", @enigma.crack("vjqtbeaweqihssi")
   end
+  # def test_find_keys_no_date
+  #   @enigma.encrypt("hello world end", "08304", "291018")
+  #   assert_equal "08304", @enigma.find_keys_no_date("vjqtbeaweqihssi", "2910818")
+  # end
+
+  # def test_first_key
+  #   assert_equal "08304", @enigma.first_key("vjqtbeaweqihssi", "291018")
+  # end
+  #
+  # def test_first_key
+  #   assert_equal "08304", @enigma.find_other_keys("vjqtbeaweqihssi", "291018")
+  # end
 
 
 
