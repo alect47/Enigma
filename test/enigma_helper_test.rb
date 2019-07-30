@@ -6,11 +6,6 @@ class EnigmaHelperTest < Minitest::Test
     @enigma = Enigma.new
   end
 
-  def test_convert_message_to_array
-    expected = ["H", "i", " ", "h", "e", "l", "l", "o", "!"]
-    assert_equal expected, @enigma.to_array("Hi hello!")
-  end
-
   def test_find_alphabet_index
     assert_equal 7, @enigma.find_position("h")
   end
@@ -28,12 +23,12 @@ class EnigmaHelperTest < Minitest::Test
   end
 
   def test_use_shift_to_rotate_alphabet
-    assert_equal "m", @enigma.use_shift_rotate("12345", "280819")[:A][0]
+    assert_equal "m", @enigma.make_new_alphabets("12345", "280819")[:A][0]
   end
 
-  def test_convert_shift_to_mod
+  def test_mod_shift
     expected = {:A=>12, :B=>3, :C=>13, :D=>19}
-    assert_equal expected, @enigma.convert_shift_to_mod("12345", "280819")
+    assert_equal expected, @enigma.mod_shift("12345", "280819")
   end
 
   def test_count_up_keys

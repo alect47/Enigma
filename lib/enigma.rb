@@ -17,36 +17,26 @@ class Enigma
 
   def encrypted_values(phrase, key, offset)
     a = []
+    shifts = mod_shift(key, offset)
     letter_to_index(phrase).each_with_index do |num, index|
-      if (num.is_a? Integer) && index % 4 == 0
-        a << ((num + convert_shift_to_mod(key, offset)[:A]) % 27)
-      elsif (num.is_a? Integer) && index % 4 == 1
-        a << ((num + convert_shift_to_mod(key, offset)[:B]) % 27)
-      elsif (num.is_a? Integer) && index % 4 == 2
-        a << ((num + convert_shift_to_mod(key, offset)[:C]) % 27)
-      elsif (num.is_a? Integer) && index % 4 == 3
-        a << ((num + convert_shift_to_mod(key, offset)[:D]) % 27)
-      else
-        a << num
-      end
+      a << ((num + shifts[:A]) % 27) if (num.is_a? Integer) && index % 4 == 0
+      a << ((num + shifts[:B]) % 27) if (num.is_a? Integer) && index % 4 == 1
+      a << ((num + shifts[:C]) % 27) if (num.is_a? Integer) && index % 4 == 2
+      a << ((num + shifts[:D]) % 27) if (num.is_a? Integer) && index % 4 == 3
+      a << num if !num.is_a? Integer
     end
     a
   end
 
   def decrypted_values(phrase, key, offset)
     a = []
+    shifts = mod_shift(key, offset)
     letter_to_index(phrase).each_with_index do |num, index|
-      if (num.is_a? Integer) && index % 4 == 0
-        a << ((num - convert_shift_to_mod(key, offset)[:A]) % 27)
-      elsif (num.is_a? Integer) && index % 4 == 1
-        a << ((num - convert_shift_to_mod(key, offset)[:B]) % 27)
-      elsif (num.is_a? Integer) && index % 4 == 2
-        a << ((num - convert_shift_to_mod(key, offset)[:C]) % 27)
-      elsif (num.is_a? Integer) && index % 4 == 3
-        a << ((num - convert_shift_to_mod(key, offset)[:D]) % 27)
-      else
-        a << num
-      end
+      a << ((num - shifts[:A]) % 27) if (num.is_a? Integer) && index % 4 == 0
+      a << ((num - shifts[:B]) % 27) if (num.is_a? Integer) && index % 4 == 1
+      a << ((num - shifts[:C]) % 27) if (num.is_a? Integer) && index % 4 == 2
+      a << ((num - shifts[:D]) % 27) if (num.is_a? Integer) && index % 4 == 3
+      a << num if !num.is_a? Integer
     end
     a
   end
@@ -79,12 +69,11 @@ class Enigma
   end
 
   def find_keys_no_date(e_message, date = Offset.new.date)
-    a = find_shift_of_last_four(e_message)
     # binding.pry
-    @date = date
+    a = find_shift_of_last_four(e_message)
+    # @date = date
     count_up_keys.find do |key|
-      decrypted = decrypt(e_message, key, @date)
-      # binding.pry
+      decrypted = decrypt(e_message, key, date)
         decrypted[:decryption][a[:D][1]] == find_expected_last_four(e_message)[:D] &&
         decrypted[:decryption][a[:C][1]] == find_expected_last_four(e_message)[:C] &&
         decrypted[:decryption][a[:B][1]] == find_expected_last_four(e_message)[:B] &&

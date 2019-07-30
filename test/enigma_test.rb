@@ -19,15 +19,11 @@ class EnigmaTest < Minitest::Test
   end
 
 
-
-
-
-
-  def test_encrypt_values
+  def test_encrypted_values
     assert_equal [19, 11, 12, 26, 16, 14, 24, 6, "!"], @enigma.encrypted_values("Hi hello!", "12345", "280819")
   end
 
-  def test_decrypt_values
+  def test_decrypted_values
     assert_equal [7, 4, 11, 11, 14, 26, 22, 14, 17, 11, 3, "!"], @enigma.decrypted_values("keder ohulw!", "02715", "040895")
   end
 
@@ -76,8 +72,8 @@ class EnigmaTest < Minitest::Test
 
   def test_find_keys_no_date
     skip
-    # @enigma.encrypt("hello world end", "08304", "291018")
-    assert_equal "08304", @enigma.find_keys_no_date("vjqtbeaweqihssi", "290819")
+    @enigma.encrypt("hello world end", "08304", "291018")
+    assert_equal "08304", @enigma.find_keys_no_date("vjqtbeaweqihssi", "2910818")
   end
 
   def test_crack

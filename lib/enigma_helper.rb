@@ -1,15 +1,11 @@
 module HelperMethods
 
-  def to_array(phrase)
-    phrase.split("")
-  end
-
   def find_position(letter)
     alphabet.index(letter)
   end
 
   def letter_to_index(phrase)
-    to_array(phrase).map do |let|
+    phrase.split("").map do |let|
       if @alphabet.include?(let.downcase)
         find_position(let.downcase)
       else
@@ -22,8 +18,7 @@ module HelperMethods
     arr.map do |num|
       if num.is_a? Integer
         alphabet[num]
-      else
-        num
+      else num
       end
     end.join
   end
@@ -32,7 +27,7 @@ module HelperMethods
     @alphabet.rotate(num)
   end
 
-  def use_shift_rotate(key, offset)
+  def make_new_alphabets(key, offset)
     hash = Hash.new(0)
     make_shift_hash(key, offset).each do |k, v|
       hash[k] = rotate_alphabet(v)
@@ -40,7 +35,7 @@ module HelperMethods
     hash
   end
 
-  def convert_shift_to_mod(key, offset)
+  def mod_shift(key, offset)
     hash = Hash.new(0)
     make_shift_hash(key, offset).map do |k, v|
       hash[k] = (v %  27)
@@ -48,8 +43,8 @@ module HelperMethods
     hash
   end
 
-  def count_up_keys
-    range = (0..99999)
+  def count_up_keys(n = "99999")
+    range = (0..n.to_i)
     number_2 = []
     range.each do |n|
       number_2 << ("0" * (5 - n.to_s.length) + n.to_s)
