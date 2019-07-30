@@ -1,5 +1,3 @@
-require 'date'
-
 class Shift
   attr_reader :key, :offset, :shift_hash
 
