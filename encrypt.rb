@@ -1,5 +1,5 @@
 require './lib/enigma'
-require './lib/helper'
+require './lib/enigma_helper'
 require './lib/key'
 require './lib/offset'
 require './lib/shift'

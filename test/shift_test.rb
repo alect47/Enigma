@@ -22,4 +22,11 @@ class ShiftTest < Minitest::Test
     assert_equal ({:A=>12, :B=>30, :C=>40, :D=>46}), @shift.shift_hash
   end
 
+  def test_can_make_shift_with_no_input
+    key = Key.new
+    offset = Offset.new
+    shift = Shift.new(key, offset)
+    assert_equal 4 , shift.combine.keys.count
+  end
+
 end

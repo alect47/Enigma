@@ -15,8 +15,8 @@ class OffsetTest < Minitest::Test
   end
 
   def test_can_find_current_date
-    @offset.stubs(:date).returns("260719")
-    assert_equal "260719", @offset.date
+    @offset.stubs(:current_date).returns("260719")
+    assert_equal "260719", @offset.current_date
   end
 
   def test_can_square_date
@@ -38,6 +38,5 @@ class OffsetTest < Minitest::Test
     }
     assert_equal expected, @offset.make_offset_hash
   end
-
 
 end

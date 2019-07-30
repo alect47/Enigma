@@ -13,11 +13,12 @@ incoming_text = handle.read
 
 handle.close
 
-decrypted_text = @enigma.decrypt(incoming_text.strip, ARGV[2], ARGV[3])
+# binding.pry
+cracked_text = @enigma.crack(incoming_text.strip, ARGV[2])
 # binding.pry
 
 
 writer = File.open(ARGV[1], "w")
-writer.write(decrypted_text[:decryption])
+writer.write(cracked_text[:decryption])
 writer.close
-puts "Created #{ARGV[1]} with the key #{decrypted_text[:key]} and the date #{decrypted_text[:date]}"
+puts "Created #{ARGV[1]} with the key #{cracked_text[:key]} and the date #{cracked_text[:date]}"
