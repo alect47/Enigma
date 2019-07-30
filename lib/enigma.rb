@@ -83,7 +83,8 @@ class Enigma
   # end
 
   def crack(e_message, date)
-    decrypt(e_message, find_keys(e_message, date), date)
+    key = find_keys(e_message, date)
+    decrypt(e_message, key, date)
   end
 
 end
