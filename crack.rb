@@ -8,14 +8,10 @@ require 'pry'
 @enigma = Enigma.new
 
 handle = File.open(ARGV[0], "r")
-
 incoming_text = handle.read
-
 handle.close
 
-# binding.pry
 cracked_text = @enigma.crack(incoming_text.strip, ARGV[2])
-# binding.pry
 
 
 writer = File.open(ARGV[1], "w")

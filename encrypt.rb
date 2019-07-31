@@ -8,9 +8,7 @@ require 'pry'
 @enigma = Enigma.new
 
 handle = File.open(ARGV[0], "r")
-
 incoming_text = handle.read
-
 handle.close
 
 encrypted_text = @enigma.encrypt(incoming_text.strip)
