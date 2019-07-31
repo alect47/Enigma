@@ -47,7 +47,7 @@ class EnigmaTest < Minitest::Test
 
   def test_encrypt_with_no_date
     expected = {
-      :encryption=>"pnhawisdzu ", :key=>"02715", :date=>"300719"
+      :encryption=>"pnhawisdzu ", :key=>"02715", :date=>"310719"
     }
     assert_equal expected, @enigma.encrypt("hello world", "02715")
   end
@@ -71,21 +71,7 @@ class EnigmaTest < Minitest::Test
     @enigma.encrypt("hello world end", "08304", "291018")
     expected = {:decryption=>"hello world end", :key=>"08304", :date=>"291018"}
     assert_equal expected, @enigma.crack("vjqtbeaweqihssi", "291018")
-    # assert_equal "", @enigma.crack("vjqtbeaweqihssi")
   end
-  # def test_find_keys_no_date
-  #   @enigma.encrypt("hello world end", "08304", "291018")
-  #   assert_equal "08304", @enigma.find_keys_no_date("vjqtbeaweqihssi", "2910818")
-  # end
-
-  # def test_first_key
-  #   assert_equal "08304", @enigma.first_key("vjqtbeaweqihssi", "291018")
-  # end
-  #
-  # def test_first_key
-  #   assert_equal "08304", @enigma.find_other_keys("vjqtbeaweqihssi", "291018")
-  # end
-
 
 
 end
