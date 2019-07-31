@@ -69,19 +69,6 @@ class Enigma
     end
   end
 
-  # def find_keys_no_date(e_message, date = Offset.new.date)
-  #   # binding.pry
-  #   a = find_shift_of_last_four(e_message)
-  #   # @date = date
-  #   count_up_keys.find do |key|
-  #     decrypted = decrypt(e_message, key, date)
-  #       decrypted[:decryption][a[:D][1]] == find_expected_last_four(e_message)[:D] &&
-  #       decrypted[:decryption][a[:C][1]] == find_expected_last_four(e_message)[:C] &&
-  #       decrypted[:decryption][a[:B][1]] == find_expected_last_four(e_message)[:B] &&
-  #       decrypted[:decryption][a[:A][1]] == find_expected_last_four(e_message)[:A]
-  #   end
-  # end
-
   def crack(e_message, date)
     key = find_keys(e_message, date)
     decrypt(e_message, key, date)

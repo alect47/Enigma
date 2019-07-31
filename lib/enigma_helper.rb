@@ -43,8 +43,8 @@ module HelperMethods
     hash
   end
 
-  def count_up_keys(n = "99999")
-    range = (0..n.to_i)
+  def count_up_keys
+    range = (0..99999)
     number_2 = []
     range.each do |n|
       number_2 << ("0" * (5 - n.to_s.length) + n.to_s)
@@ -57,15 +57,10 @@ module HelperMethods
     a = message.split("")
     b = {}
     a.each_with_index do |let, index|
-      if index % 4 == 3
-        b[:D] = [let, index]
-      elsif index % 4 == 2
-        b[:C] = [let, index]
-      elsif index % 4 == 1
-        b[:B] = [let, index]
-      elsif index % 4 == 0
-        b[:A] = [let, index]
-      end
+      b[:D] = [let, index] if index % 4 == 3
+      b[:C] = [let, index] if index % 4 == 2
+      b[:B] = [let, index] if index % 4 == 1
+      b[:A] = [let, index] if index % 4 == 0
     end
     b
   end
@@ -77,13 +72,10 @@ module HelperMethods
     end
   end
 
-  #NEEDS TEST
   def find_expected_last_four(message)
     b = [" ", "e", "n", "d"]
     a = {}
-    order_last_four(message).each_with_index do |n, index|
-      a[n[0]] = b[index]
-    end
+    order_last_four(message).each_with_index  {|n, index| a[n[0]] = b[index]}
     a
   end
 
